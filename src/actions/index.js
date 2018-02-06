@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Firebase from 'firebase';
+
 
 export const FETCH_POSTS = 'fetch_posts';
 export const CREATE_POST = 'create_post';
@@ -8,12 +10,22 @@ export const DELETE_POST = 'delete_post';
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=PAPERCLIP9999'
 
-export function fetchPosts() {
-    const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
+const Posts = new Firebase('https://fantastic-parakeet-v2.firebaseio.com');;
 
-    return{
-        type: FETCH_POSTS,
-        payload: request
+export function fetchPosts() {
+    // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
+
+    // return{
+    //     type: FETCH_POSTS,
+    //     payload: request
+    // };
+    return dispatch => {
+        Posts.on('value', snapshot => {
+            dispatch({
+                type: FETCH_POSTS,
+                payload: snapshot.val()
+            });
+        });
     };
 }
 
