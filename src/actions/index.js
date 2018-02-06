@@ -10,7 +10,7 @@ export const DELETE_POST = 'delete_post';
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=PAPERCLIP9999'
 
-const Posts = new Firebase('https://fantastic-parakeet-v2.firebaseio.com');;
+const Posts = new Firebase('');
 
 export function fetchPosts() {
     // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
